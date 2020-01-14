@@ -83,15 +83,57 @@ const newsService = (function() {
     topHeadlines(country = ru, callback) {
       myHttp.get(`${url}/top-headlines?country=${country}&apiKey=${apiKey}`, callback);
     },
-    everethyng(query, callback) {
-      myHttp.get(`${url}/top-headlines?query=${query}&apiKey=${apiKey}`, callback);
+    everything(query, callback) {
+      myHttp.get(`${url}/everything?q=${query}&apiKey=${apiKey}`, callback);
     }
   }
 })();
 
+//Elements
+let ddSelect = document.querySelector('.header-dropdown__label');
+let ddList = document.querySelector('.header-dropdown__list');
+let ddItems = document.querySelectorAll('.header-dropdown__item');
+let form = document.forms['form'];
+let countrySelect = form.elements['country'];
+let inputSearch = form.elements['search'];
 
+//Events
+document.addEventListener('DOMContentLoaded', function() {
+  loadNews();
+});
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  loadNews();
+});
+
+ddSelect.addEventListener('click', (e) => {
+  ddList.classList.toggle('header-dropdown__list_active');
+});
+
+ddItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    let selectedTheme = themes[item.id];
+    Object.entries(selectedTheme).forEach(([key,val]) => {
+      document.documentElement.style.setProperty(key,val);
+    })
+    ddList.classList.toggle('header-dropdown__list_active');
+  })
+})
+
+
+
+// Functions
 function loadNews() {
-  newsService.topHeadlines('ru', onGetResponse);
+  const country = countrySelect.value;
+  const searchText = inputSearch.value;
+
+  if (!searchText) {
+    newsService.topHeadlines(country, onGetResponse);
+  }
+  else {
+    newsService.everything(searchText, onGetResponse);
+  }
 };
 
 function onGetResponse(err, res) {
@@ -128,31 +170,6 @@ function newsTemplate({urlToImage, title, url, description}) {
   </div>
   `
 };
-
-//Elements
-let ddSelect = document.querySelector('.header-dropdown__label');
-let ddList = document.querySelector('.header-dropdown__list');
-let ddItems = document.querySelectorAll('.header-dropdown__item');
-
-//Events
-document.addEventListener('DOMContentLoaded', function() {
-  loadNews();
-});
-
-ddSelect.addEventListener('click', (e) => {
-  ddList.classList.toggle('header-dropdown__list_active');
-});
-
-ddItems.forEach(item => {
-  item.addEventListener('click', (e) => {
-    let selectedTheme = themes[item.id];
-    Object.entries(selectedTheme).forEach(([key,val]) => {
-      document.documentElement.style.setProperty(key,val);
-    })
-    ddList.classList.toggle('header-dropdown__list_active');
-  })
-})
-
 
 
 

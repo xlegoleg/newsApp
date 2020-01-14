@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My news app</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="header-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <h1 class="header-title">My news application</h1>
+            </div>
+            <div class="col-2 offset-4">
+              <div class="header-dropdown">
+                <div class="header-dropdown__label">select theme</div>
+                <ul class="header-dropdown__list">
+                  <li id="default" class="header-dropdown__item">default</li>
+                  <li id="dark" class="header-dropdown__item">dark</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <section id="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div class="main-wrapper">
+            <h2 class="main-title">Search news</h2>
+            <form class="main-form">
+              <div class="main-form__field">
+                <label class="main-form__label">Choose your country</label>
+                <select name="country" id="country">
+                  <option value="ru">Russia</option>
+                  <option value="us">United States</option>
+                </select>
+              </div>
+              <div class="main-form__field">
+                <input placeholder="Search" name="search" type="text" class="main-form__input" id="main-form__input">
+              </div>
+              <div class="main-form__field">
+                <button class="main-form__button">Go</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="news-container">
+        <div class="row">
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="js/script.js"></script>
+</body>
+</html>

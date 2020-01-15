@@ -75,7 +75,7 @@ let themes = {
 
 const myHttp = http();
 
-const newsService = (function() {
+  const newsService = (function() {
   const apiKey = "b1599beedfec43baaa1bed635b5ecd91";
   const url = "https://newsapi.org/v2";
 

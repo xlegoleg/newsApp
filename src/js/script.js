@@ -13,6 +13,12 @@ function http() {
           }
       
           let response = JSON.parse(xml.response);
+
+          if (!response.articles.length) {
+            callback('Error!!! Not valid query.', xml)
+              return;
+          }
+
           callback (null, response);
       })
       
@@ -38,6 +44,7 @@ function http() {
           }
       
           let response = JSON.parse(xml.response);
+          
           callback (null, response);
       })
       
@@ -134,21 +141,28 @@ function loadNews() {
   }
   else {
     newsService.everything(searchText, onGetResponse);
+    inputSearch.value = "";
   }
 };
 
 function onGetResponse(err, res) {
+  if (err) {
+    showError(err);
+  }
   renderNews(res.articles);
 };
 
 function renderNews(news) {
-  let newsContainer = document.querySelector('.news-container .row');
-  let fragment = "";
-  news.forEach((item) => {
-    let element = newsTemplate(item);
-    fragment += element;
-  })
-  newsContainer.insertAdjacentHTML('afterbegin', fragment);
+let newsContainer = document.querySelector('.news-container .row');
+if (newsContainer.children.length) {
+  clearNews(newsContainer);
+};
+let fragment = "";
+news.forEach((item) => {
+  let element = newsTemplate(item);
+  fragment += element;
+})
+newsContainer.insertAdjacentHTML('afterbegin', fragment);
 };
 
 function newsTemplate({urlToImage, title, url, description}) {
@@ -172,5 +186,22 @@ function newsTemplate({urlToImage, title, url, description}) {
   `
 };
 
+function showError(err) {
+  let error = document.querySelector('.error');
+  error.firstChild.textContent = err;
+  error.classList.add('error_active');
+  setTimeout(function() {
+    error.classList.remove('error_active');
+    error.firstChild.textContent = "";
+  },3000);
+};
+
+function clearNews(newsContainer) {
+  let child = newsContainer.lastElementChild;
+  while (child) {
+    newsContainer.removeChild(child);
+    child = newsContainer.lastElementChild;
+  };
+}
 
 

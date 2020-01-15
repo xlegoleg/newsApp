@@ -96,6 +96,7 @@ let ddItems = document.querySelectorAll('.header-dropdown__item');
 let form = document.forms['form'];
 let countrySelect = form.elements['country'];
 let inputSearch = form.elements['search'];
+let errWindow =document.querySelector('.error');
 
 //Events
 document.addEventListener('DOMContentLoaded', function() {

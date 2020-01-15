@@ -7,6 +7,7 @@
   --main-color: rgb(194, 31, 31);;
   --main-color-lighter: rgb(204, 94, 94);
   --main-color-grey:rgba(139, 139, 139, 0.363);
+  --main-color-error:rgba(139, 139, 139, 0.767);
   --main-shadow-color: rgba(39, 39, 39, 0.568);
   --header-text-color: #fff;
 }
@@ -143,7 +144,6 @@ input {
   color: #000;
 }
 
-
 .news-card {
   margin: 10px 0px 10px 0px;
   background-color: rgba(255,255,255, 0.6);
@@ -194,4 +194,30 @@ input {
 
 .news-card__button a:hover {
   text-decoration: none;
+}
+
+.error{
+  transition: 0.8s;
+  padding: 20px 40px 20px 40px;
+  color: #fff;
+  position: fixed;
+  top: 80%;
+  left: -100%;
+  background-color: var(--main-color);
+}
+
+.error_active {
+  transition: 0.8s;
+  padding: 20px 40px 20px 40px;
+  color: #fff;
+  position: fixed;
+  top: 80%;
+  left: 0;
+  background-color: var(--main-color);
+}
+
+.error span {
+  font-size: 18px;
+  font-weight: 700;
+  vertical-align: middle;
 }
